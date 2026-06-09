@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilli Babu P M | Data Analyst Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: '#0f172a',
+                        accent: '#3b82f6',
+                        secondary: '#6366f1',
+                        surface: '#1e293b',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; overflow-x: hidden; }
+        .glass { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .glass-card { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; }
+        .glass-card:hover { transform: translateY(-8px); border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-bg { position: relative; overflow: hidden; }
+        .hero-bg::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 50%); animation: pulse-slow 4s infinite; }
+        .grid-bg { background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 50px 50px; }
+        .skill-bar { transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #3b82f6, #6366f1); }
+        .timeline-dot { position: absolute; left: 12px; width: 18px; height: 18px; background: #3b82f6; border-radius: 50%; border: 3px solid #0f172a; box-shadow: 0 0 0 3px rgba(59,130,246,0.3); }
+        .nav-blur { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); }
+        .typewriter::after { content: '|'; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .project-img { overflow: hidden; }
+        .project-img img { transition: transform 0.6s ease; }
+        .project-img:hover img { transform: scale(1.1); }
+        .stat-number { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="grid-bg">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg">DB</div>
+                    <span class="font-bold text-xl tracking-tight text-white">Dilli Babu</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Skills</a>
+                    <a href="#experience" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Experience</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Projects</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/5">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="#skills" class="block text-gray-300 hover:text-white py-2">Skills</a>
+                <a href="#experience" class="block text-gray-300 hover:text-white py-2">Experience</a>
+                <a href="#projects" class="block text-gray-300 hover:text-white py-2">Projects</a>
+                <a href="#contact" class="block text-blue-400 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-16 relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-slide-up">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-sm text-gray-300">Available for Opportunities</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+                <span class="block text-white">Dilli Babu</span>
+                <span class="block gradient-text mt-2 typewriter" id="typewriter-text">P M</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-4 max-w-3xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
+                Data Analyst & Business Intelligence Specialist
+            </p>
+            <p class="text-gray-500 mb-10 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 0.3s;">
+                Transforming raw data into actionable insights through SQL, Python, Power BI, and Machine Learning
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.4s;">
+                <a href="#projects" class="px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold hover:shadow-xl hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+                    View Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/10 transition-all border border-white/10">
+                    Get In Touch
+                </a>
+            </div>
+            <div class="flex justify-center gap-8 mt-16 animate-slide-up" style="animation-delay: 0.5s;">
+                <a href="https://www.linkedin.com/in/dilli-babu-54685b32a/" target="_blank" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-400/50 transition-all">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="mailto:dillibabumurali221@gmail.com" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-red-400 hover:border-red-400/50 transition-all">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+                <a href="tel:+919940576965" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-400/50 transition-all">
+                    <i class="fas fa-phone text-xl"></i>
+                </a>
+                <a href="#" onclick="alert('Add your GitHub URL here!')" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:border-white/50 transition-all">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gray-500 hover:text-white transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass rounded-2xl p-6 text-center reveal">
+                    <div class="text-3xl md:text-4xl font-bold text-blue-400 mb-2 stat-number" data-target="2">0</div>
+                    <div class="text-sm text-gray-400">Internships</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center reveal">
+                    <div class="text-3xl md:text-4xl font-bold text-indigo-400 mb-2 stat-number" data-target="3">0</div>
+                    <div class="text-sm text-gray-400">Projects</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center reveal">
+                    <div class="text-3xl md:text-4xl font-bold text-purple-400 mb-2 stat-number" data-target="5">0</div>
+                    <div class="text-sm text-gray-400">Core Skills</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center reveal">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-400 mb-2 stat-number" data-target="2">0</div>
+                    <div class="text-sm text-gray-400">Degrees</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="inline-block px-4 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-4">About Me</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Data-Driven <span class="gradient-text">Problem Solver</span></h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        Results-oriented Data Analyst with hands-on experience in <strong class="text-white">SQL, Python, Power BI, and Advanced Excel</strong>. I specialize in collecting, cleaning, and validating large datasets, performing exploratory data analysis, and building interactive dashboards to monitor KPIs and support data-driven decision-making.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Experienced in ETL workflows, trend identification, and delivering actionable insights to cross-functional teams. Adept at translating complex business requirements into analytical solutions and automated reporting systems.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full glass text-sm text-blue-300"><i class="fas fa-map-marker-alt mr-2"></i>Chennai, India</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm text-blue-300"><i class="fas fa-graduation-cap mr-2"></i>MCA Graduate</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm text-blue-300"><i class="fas fa-briefcase mr-2"></i>Open to Work</span>
+                    </div>
+                </div>
+                <div class="relative reveal">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl blur-2xl opacity-20"></div>
+                    <div class="glass rounded-3xl p-8 relative">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="glass-card rounded-2xl p-6 text-center">
+                                <i class="fas fa-database text-3xl text-blue-400 mb-3"></i>
+                                <h3 class="font-semibold text-white">SQL</h3>
+                                <p class="text-sm text-gray-500 mt-1">Query & ETL</p>
+                            </div>
+                            <div class="glass-card rounded-2xl p-6 text-center">
+                                <i class="fab fa-python text-3xl text-yellow-400 mb-3"></i>
+                                <h3 class="font-semibold text-white">Python</h3>
+                                <p class="text-sm text-gray-500 mt-1">Pandas & NumPy</p>
+                            </div>
+                            <div class="glass-card rounded-2xl p-6 text-center">
+                                <i class="fas fa-chart-bar text-3xl text-indigo-400 mb-3"></i>
+                                <h3 class="font-semibold text-white">Power BI</h3>
+                                <p class="text-sm text-gray-500 mt-1">DAX & Dashboards</p>
+                            </div>
+                            <div class="glass-card rounded-2xl p-6 text-center">
+                                <i class="fas fa-file-excel text-3xl text-green-400 mb-3"></i>
+                                <h3 class="font-semibold text-white">Excel</h3>
+                                <p class="text-sm text-gray-500 mt-1">Advanced Analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-sm font-medium mb-4">Expertise</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Technical <span class="gradient-text">Skills</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Proficient in modern data analytics tools and methodologies</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Technical Skills -->
+                <div class="glass rounded-2xl p-8 reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                            <i class="fas fa-code text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Technical</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm text-gray-300">SQL</span><span class="text-sm text-blue-400">90%</span></div>
+                            <div class="w-full bg-gray-700 rounded-full h-2"><div class="skill-bar bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" style="width: 0%" data-width="90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm text-gray-300">Python (Pandas, NumPy)</span><span class="text-sm text-blue-400">85%</span></div>
+                            <div class="w-full bg-gray-700 rounded-full h-2"><div class="skill-bar bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" style="width: 0%" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm text-gray-300">Power BI & DAX</span><span class="text-sm text-blue-400">88%</span></div>
+                            <div class="w-full bg-gray-700 rounded-full h-2"><div class="skill-bar bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" style="width: 0%" data-width="88%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm text-gray-300">Advanced Excel</span><span class="text-sm text-blue-400">85%</span></div>
+                            <div class="w-full bg-gray-700 rounded-full h-2"><div class="skill-bar bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" style="width: 0%" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm text-gray-300">ETL Workflows</span><span class="text-sm text-blue-400">80%</span></div>
+                            <div class="w-full bg-gray-700 rounded-full h-2"><div class="skill-bar bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" style="width: 0%" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytical Skills -->
+                <div class="glass rounded-2xl p-8 reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center">
+                            <i class="fas fa-brain text-indigo-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Analytical</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-broom text-indigo-400"></i>
+                            <span class="text-gray-300">Data Cleaning & Preprocessing</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-chart-pie text-indigo-400"></i>
+                            <span class="text-gray-300">Data Visualization</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-tachometer-alt text-indigo-400"></i>
+                            <span class="text-gray-300">KPI Tracking & Monitoring</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-columns text-indigo-400"></i>
+                            <span class="text-gray-300">Dashboard Creation</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-check-double text-indigo-400"></i>
+                            <span class="text-gray-300">Data Validation</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-chart-line text-indigo-400"></i>
+                            <span class="text-gray-300">Trend & Pattern Identification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="glass rounded-2xl p-8 reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                            <i class="fas fa-users text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Professional</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-lightbulb text-purple-400"></i>
+                            <span class="text-gray-300">Data-Driven Decision Making</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-handshake text-purple-400"></i>
+                            <span class="text-gray-300">Cross-Functional Collaboration</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-presentation text-purple-400"></i>
+                            <span class="text-gray-300">Stakeholder Reporting</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                            <i class="fas fa-puzzle-piece text-purple-400"></i>
+                            <span class="text-gray-300">Analytical Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm font-medium mb-4">Career</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Internship <span class="gradient-text">Experience</span></h2>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto">
+                <div class="timeline-line"></div>
+                
+                <!-- Vcodez -->
+                <div class="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8 mb-12 reveal">
+                    <div class="hidden md:block text-right pr-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium">Jun 2025 – Sep 2025</span>
+                    </div>
+                    <div class="relative">
+                        <div class="timeline-dot md:left-0 md:transform md:-translate-x-1/2" style="top: 0;"></div>
+                        <div class="glass rounded-2xl p-6 md:ml-8">
+                            <span class="md:hidden inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-3">Jun 2025 – Sep 2025</span>
+                            <h3 class="text-xl font-bold text-white mb-1">Data Analytics Intern</h3>
+                            <p class="text-blue-400 font-medium mb-4">Vcodez</p>
+                            <ul class="space-y-2 text-gray-400 text-sm">
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1"></i> Cleaned and validated large datasets using SQL and Python, ensuring high data accuracy</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1"></i> Performed EDA to identify trends and support business decisions</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1"></i> Built Power BI dashboards to monitor KPIs and performance metrics</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1"></i> Automated reports and implemented ETL workflows for structured data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cognifyz -->
+                <div class="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8 reveal">
+                    <div class="hidden md:block text-right pr-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 text-sm font-medium">Previous Role</span>
+                    </div>
+                    <div class="relative">
+                        <div class="timeline-dot md:left-0 md:transform md:-translate-x-1/2" style="top: 0;"></div>
+                        <div class="glass rounded-2xl p-6 md:ml-8">
+                            <span class="md:hidden inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 text-sm font-medium mb-3">Previous Role</span>
+                            <h3 class="text-xl font-bold text-white mb-1">Data Analysis Intern</h3>
+                            <p class="text-indigo-400 font-medium mb-4">Cognifyz Technologies</p>
+                            <ul class="space-y-2 text-gray-400 text-sm">
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-indigo-500 mt-1"></i> Conducted EDA and generated reports aligned with business requirements</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-indigo-500 mt-1"></i> Collaborated with teams to deliver data-driven insights</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-indigo-500 mt-1"></i> Worked on data collection, preprocessing, and reporting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-4">Portfolio</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Real-world applications demonstrating analytical and technical capabilities</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-chart-line text-6xl text-white/20 absolute transform group-hover:scale-110 transition-transform duration-500"></i>
+                        <div class="relative z-10 text-center">
+                            <i class="fas fa-chart-pie text-4xl text-white mb-2"></i>
+                            <p class="text-white font-semibold">Power BI Dashboard</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs">Power BI</span>
+                            <span class="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs">DAX</span>
+                            <span class="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs">ETL</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">E-Commerce Sales Dashboard</h3>
+                        <p class="text-gray-400 text-sm mb-4">Interactive Power BI dashboard using Amazon and Flipkart-style sales data to analyze platform, product, and customer performance with DAX measures for sales, profit, margin, and KPI tracking.</p>
+                        <div class="flex gap-3">
+                            <button onclick="alert('Add your project demo link here!')" class="flex-1 py-2 rounded-lg bg-blue-500/20 text-blue-400 text-sm font-medium hover:bg-blue-500/30 transition-colors">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </button>
+                            <button onclick="alert('Add your GitHub repo link here!')" class="flex-1 py-2 rounded-lg glass text-gray-400 text-sm font-medium hover:text-white transition-colors">
+                                <i class="fab fa-github mr-2"></i>Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                    <div class="h-48 bg-gradient-to-br from-purple-600 to-pink-700 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-wine-glass text-6xl text-white/20 absolute transform group-hover:scale-110 transition-transform duration-500"></i>
+                        <div class="relative z-10 text-center">
+                            <i class="fas fa-robot text-4xl text-white mb-2"></i>
+                            <p class="text-white font-semibold">ML Prediction</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-1 rounded bg-purple-500/20 text-purple-400 text-xs">Python</span>
+                            <span class="px-2 py-1 rounded bg-purple-500/20 text-purple-400 text-xs">Pandas</span>
+                            <span class="px-2 py-1 rounded bg-purple-500/20 text-purple-400 text-xs">ML</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Wine Preference Prediction</h3>
+                        <p class="text-gray-400 text-sm mb-4">Machine learning models to predict wine preferences using customer datasets. Performed EDA with Python (Pandas & NumPy) to identify trends and patterns, improving classification accuracy.</p>
+                        <div class="flex gap-3">
+                            <button onclick="alert('Add your project demo link here!')" class="flex-1 py-2 rounded-lg bg-purple-500/20 text-purple-400 text-sm font-medium hover:bg-purple-500/30 transition-colors">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </button>
+                            <button onclick="alert('Add your GitHub repo link here!')" class="flex-1 py-2 rounded-lg glass text-gray-400 text-sm font-medium hover:text-white transition-colors">
+                                <i class="fab fa-github mr-2"></i>Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                    <div class="h-48 bg-gradient-to-br from-green-600 to-teal-700 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-comments text-6xl text-white/20 absolute transform group-hover:scale-110 transition-transform duration-500"></i>
+                        <div class="relative z-10 text-center">
+                            <i class="fas fa-brain text-4xl text-white mb-2"></i>
+                            <p class="text-white font-semibold">NLP Chatbot</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs">Python</span>
+                            <span class="px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs">NLP</span>
+                            <span class="px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs">Flask</span>
+                            <span class="px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs">Groq API</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Parkinson's Disease Chatbot</h3>
+                        <p class="text-gray-400 text-sm mb-4">AI-powered multilingual chatbot providing healthcare information across five languages. Integrated with Groq API using Python, NLP, and Flask for real-time intelligent responses.</p>
+                        <div class="flex gap-3">
+                            <button onclick="alert('Add your project demo link here!')" class="flex-1 py-2 rounded-lg bg-green-500/20 text-green-400 text-sm font-medium hover:bg-green-500/30 transition-colors">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </button>
+                            <button onclick="alert('Add your GitHub repo link here!')" class="flex-1 py-2 rounded-lg glass text-gray-400 text-sm font-medium hover:text-white transition-colors">
+                                <i class="fab fa-github mr-2"></i>Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm font-medium mb-4">Education</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Academic <span class="gradient-text">Background</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="glass rounded-2xl p-8 reveal hover:border-blue-500/30 transition-colors">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-graduation-cap text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-blue-400 text-sm font-medium">2023 – 2025</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Master of Computer Applications (MCA)</h3>
+                            <p class="text-gray-400 mt-2">Sri Muthukumaran Institute of Technology, Chennai</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs">Data Analytics</span>
+                                <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs">Machine Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl p-8 reveal hover:border-indigo-500/30 transition-colors">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-university text-indigo-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-indigo-400 text-sm font-medium">2021 – 2023</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Bachelor of Computer Applications (BCA)</h3>
+                            <p class="text-gray-400 mt-2">Vels Institute of Science, Technology & Advanced Studies, Chennai</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 rounded bg-indigo-500/10 text-indigo-400 text-xs">Programming</span>
+                                <span class="px-2 py-1 rounded bg-indigo-500/10 text-indigo-400 text-xs">Database</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass rounded-3xl p-8 md:p-16 reveal relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="relative z-10 grid md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="inline-block px-4 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-4">Contact</div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Let's Work <span class="gradient-text">Together</span></h2>
+                        <p class="text-gray-400 text-lg mb-8">Open to data analyst roles, freelance projects, and collaboration opportunities. Let's turn your data into insights.</p>
+                        
+                        <div class="space-y-6">
+                            <a href="mailto:dillibabumurali221@gmail.com" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center group-hover:bg-red-500/30 transition-colors">
+                                    <i class="fas fa-envelope text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Email</p>
+                                    <p class="text-white font-medium group-hover:text-red-400 transition-colors">dillibabumurali221@gmail.com</p>
+                                </div>
+                            </a>
+                            <a href="tel:+919940576965" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
+                                    <i class="fas fa-phone text-green-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Phone</p>
+                                    <p class="text-white font-medium group-hover:text-green-400 transition-colors">+91-9940576965</p>
+                                </div>
+                            </a>
+                            <a href="https://www.linkedin.com/in/dilli-babu-54685b32a/" target="_blank" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                                    <i class="fab fa-linkedin text-blue-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">LinkedIn</p>
+                                    <p class="text-white font-medium group-hover:text-blue-400 transition-colors">linkedin.com/in/dilli-babu-54685b32a</p>
+                                </div>
+                            </a>
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-purple-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Location</p>
+                                    <p class="text-white font-medium">Chennai, India</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8">
+                        <form onsubmit="event.preventDefault(); alert('This is a demo form. Connect via email or LinkedIn!');" class="space-y-4">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors" placeholder="your@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Message</label>
+                                <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none" placeholder="Tell me about your project..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-[1.02]">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-sm"> 2025 Dilli Babu P M. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="https://www.linkedin.com/in/dilli-babu-54685b32a/" target="_blank" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="mailto:dillibabumurali221@gmail.com" class="text-gray-500 hover:text-white transition-colors"><i class="fas fa-envelope text-xl"></i></a>
+                <a href="tel:+919940576965" class="text-gray-500 hover:text-white transition-colors"><i class="fas fa-phone text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Reveal on scroll
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Animate skill bars
+                    const skillBars = entry.target.querySelectorAll('.skill-bar');
+                    skillBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                    
+                    // Animate stat numbers
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        let current = 0;
+                        const increment = target / 30;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                stat.textContent = target;
+                                clearInterval(timer);
+                            } else {
+                                stat.textContent = Math.floor(current);
+                            }
+                        }, 50);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Typewriter effect
+        const typeText = "Data Analyst";
+        const typeElement = document.getElementById('typewriter-text');
+        let typeIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const current = typeElement.textContent;
+            if (!isDeleting && typeIndex < typeText.length) {
+                typeElement.textContent = typeText.substring(0, typeIndex + 1);
+                typeIndex++;
+                setTimeout(typeEffect, 100);
+            } else if (isDeleting && typeIndex > 0) {
+                typeElement.textContent = typeText.substring(0, typeIndex - 1);
+                typeIndex--;
+                setTimeout(typeEffect, 50);
+            } else {
+                isDeleting = !isDeleting;
+                setTimeout(typeEffect, isDeleting ? 1000 : 500);
+            }
+        }
+        
+        // Start typewriter after initial animation
+        setTimeout(() => {
+            typeElement.textContent = "";
+            typeEffect();
+        }, 2000);
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
